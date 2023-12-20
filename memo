@@ -1,0 +1,44 @@
+
+TS 설치, 기본 세팅
+https://velog.io/@nemo/typescript-install-setting
+
+
+npm i ts-node // ts를 js로 컴파일 후 node에서 실행
+npm i typescript@4.0.0 // ts-node를 먼저 설치해야 얘랑 오류 안나고 호환댐
+npx tsc --init // tsconfig.json 파일 생성
+npm install --save-dev @types/react 
+
+
+
+react-scripts와 호환 문제가 생기는 경우 Typescript를 4버전으로 설치 (react-scripts 5버전과 ts 5버전이 안 맞음)
+이후 npm install --save-dev @types/react 설치
+
+
+
+------------------
+
+
+https://stackoverflow.com/questions/77621320/im-trying-to-deploy-my-react-app-with-vercel-i-did-every-step-in-my-terminal-b
+
+/////////////////////
+
+npm i typescript
+npm i ts-node 중에 난 에러해결
+
+npm ERR! While resolving: react-scripts@5.0.1
+npm ERR! Found: typescript@5.3.3
+npm ERR! node_modules/typescript
+npm ERR!   peer typescript@">= 2.7" from fork-ts-checker-webpack-plugin@6.5.3
+
+이 에러는 react-scripts가 설치하는 typescript 버전과 이미 설치되어 있는 typescript 버전 간의 충돌로 인한 것으로 보입니다.
+
+/////////////////////
+
+
+위의 설정은 react-scripts 패키지의 typescript 버전을 최소한 5.x 버전으로 강제로 설정한 것으로 보입니다.
+이 설정을 통해 react-scripts가 설치하는 typescript 버전을 5.x 버전으로 사용하도록 지정했습니다.
+*react 실행을 돕는 공식 빌드 도구
+
+
+
+
