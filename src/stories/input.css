@@ -1,0 +1,16 @@
+.input-style {
+    width: 200px;
+    height: 40px;
+
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 12px;
+
+    color: #000;
+    border: none;
+}
+
+.input-outline {
+    border: 1px solid #e2e2e2;
+}

@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react"
 import Movie from './Movie'
 import { IMovie } from './interfaces'
+import styled from 'styled-components'
+import {Container} from './styled'
+
+const MovieWrapper = styled.div`
+
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
 
 function Main() {
 
@@ -27,21 +38,23 @@ function Main() {
   }, [])
 
   return (
-    <div className="Main">
-
+    <Container>
       {
         loading ? ( // 영화 API fetch가 끝나기 전까진 로딩 화면 출력
           <p>loading...</p>
         ) : 
-        <div>
+        <>
+        <h2>Contents</h2>
+        <MovieWrapper>
           {movies && movies.map(movie => ( // 이후 배열 렌더링을 통해 화면 페인팅
             <Movie id={movie.id} title={movie.title} imgSrc={movie.medium_cover_image} />
             // <div>{movie.title}</div>
           ))}
-        </div>
+        </MovieWrapper>
+        </>
       }
    
-    </div>
+    </Container>
   );
 }
 

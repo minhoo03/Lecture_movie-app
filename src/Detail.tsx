@@ -1,6 +1,69 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { IMovie } from './interfaces'
+import styled from 'styled-components'
+import {Container} from './styled'
+import {StyledGenres}from './stories/GenresContainer'
+
+
+const Background = styled.div<{bgImg?: string}>`
+  width: 100%;
+  min-height: 100%;
+
+  ${({ bgImg }) => 
+
+    bgImg &&
+    `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url(${bgImg});
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `
+  }
+`
+
+const DetailContainer = styled.div`
+  width: 100%;
+  max-width: 720px;
+  height: 100%;
+  max-height: 345px;
+
+  display: flex;
+  
+
+  background-color: rgba(225, 225, 225, 0.5);
+  padding: 20px;
+`
+
+const DetailContent = styled.div`
+  height: 1010%;
+  margin-left: 40px;
+
+  display: flex;
+  flex-direction: column;
+
+  h3, p {
+    margin: 0;
+    padding: 0;
+    text-aling:center;
+  }
+
+  h3 {
+    margin-bottom: 40px;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+`
 
 function Detail() {
   const { id } = useParams<{ id: string }>() // URL 파라미터에서 id를 string으로 받음
@@ -29,22 +92,38 @@ function Detail() {
   }, [id]) // id가 변경될 때마다 API 호출
 
   return (
-    <div className="Detail">
+    <Container>
       {
         loading ? (
           <p>loading...</p>
         ) : movie ? ( // movie가 null이 아닌 경우에만 렌더링
-          <div>
+          <Background bgImg={movie.background_image}>
+
+            {/* StyledGenres */}
+            <DetailContainer>
             <img src={movie.medium_cover_image} alt={movie.title} />
-            <h3>{movie.title}</h3>
-            <p>{movie.description_intro}</p>
-          </div>
+
+            <DetailContent>
+              <h3>{movie.title}</h3>
+              <p>{movie.description_intro ? movie.description_intro : 'lorem lorem ifsum..lorem ifsum..lorem ifsum.. ifsum..'}</p>
+
+              <StyledGenres>
+                {
+                  movie.genres && movie.genres.map(item => <span>{item}</span>)
+                }
+              </StyledGenres>
+            </DetailContent>
+
+            </DetailContainer>
+            
+            
+          </Background>
         ) : (
           <p>Movie not found</p>
         )
       }
 
-    </div>
+    </Container>
   );
 }
 
